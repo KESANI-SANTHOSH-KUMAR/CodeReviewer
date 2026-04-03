@@ -15,7 +15,9 @@ import type {
 dotenv.config();
 
 const app = express();
-app.use(cors({ origin: process.env.CORS_ORIGIN ?? "*" }));
+app.use(cors({
+  origin: '*'
+}));
 app.use(express.json({ limit: "2mb" }));
 
 app.get("/health", (_req, res) => {
