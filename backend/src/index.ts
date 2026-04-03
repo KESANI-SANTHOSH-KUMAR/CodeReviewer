@@ -22,27 +22,26 @@ app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
 
-app.get("/sessions", (_req, res) => {
-  res.json(listSessions());
+app.get("/sessions", async (req, res) => {
+  const sessions = await listSessions();
+  res.json(sessions);
 });
 
-app.get("/sessions/:id", (req, res) => {
-  const session = getSession(req.params.id);
+app.get("/sessions/:id", async (req, res) => {
+  const session = await getSession(req.params.id);
 
   if (!session) {
-    res.status(404).json({ message: "Session not found" });
-    return;
+    return res.status(404).json({ message: "Session not found" });
   }
 
   res.json(session);
 });
 
-app.delete("/sessions/:id", (req, res) => {
-  const removed = deleteSession(req.params.id);
+app.delete("/sessions/:id", async (req, res) => {
+  const removed = await deleteSession(req.params.id);
 
   if (!removed) {
-    res.status(404).json({ message: "Session not found" });
-    return;
+    return res.status(404).json({ message: "Session not found" });
   }
 
   res.json({ message: "Deleted successfully" });
