@@ -645,7 +645,7 @@ echo 'Hello World';
               <div className="empty-state">Loading sessions…</div>
             ) : todaySessions.length === 0 ? (
               <div className="empty-state">
-                No sessions from today yet. Run your first review and it will appear here.
+                No sessions 
               </div>
             ) : (
               todaySessions.map((session) => (
