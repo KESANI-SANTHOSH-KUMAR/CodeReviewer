@@ -23,8 +23,13 @@ app.get("/health", (_req, res) => {
 });
 
 app.get("/sessions", async (req, res) => {
-  const sessions = await listSessions();
-  res.json(sessions);
+  try {
+    const sessions = await listSessions();
+    res.json(sessions);
+  } catch (err) {
+    console.error("SESSION FETCH ERROR:", err);
+    res.status(500).json({ message: "DB error" });
+  }
 });
 
 app.get("/sessions/:id", async (req, res) => {
@@ -214,7 +219,7 @@ wss.on("connection", (ws) => {
 
       const review = extractReview(aggregated);
 
-      saveSession({
+      await saveSession({
         sessionId: reviewSessionId,
         code: parsed.code,
         language: parsed.language,
