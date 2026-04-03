@@ -17,15 +17,15 @@ function safeJsonParse(value) {
 function normalizeIssue(item) {
   if (typeof item === "string") {
     let text = item.trim();
-
+    // Try to fix common AI formatting issues (single quotes to double quotes)
     try {
       const fixed = text.replace(/'/g, '"');
       const parsed = JSON.parse(fixed);
-
       return {
-        text: parsed.message || text,
+        // Map whatever the AI sends to the "text" key the UI needs
+        text: parsed.description || parsed.message || parsed.text || text,
         line: parsed.line ?? null,
-        column: parsed.column ?? null,
+        column: parsed.column ?? (parsed.col ?? null), // handle "col" or "column"
       };
     } catch {
       return { text, line: null, column: null };
@@ -33,19 +33,15 @@ function normalizeIssue(item) {
   }
 
   if (item && typeof item === "object") {
-    const message =
-      item.message || item.text || item.description || item.detail || item.msg || "";
-
     return {
-      text: message ? String(message) : JSON.stringify(item),
+      // Prioritize 'description' since that's what your AI is currently sending
+      text: item.description || item.message || item.text || "Issue detected",
       line: item.line ?? null,
-      column: item.column ?? null,
+      column: item.column ?? (item.col ?? null),
     };
   }
-
   return null;
 }
-
 function normalizeReview(review) {
   if (!review) {
     return {
