@@ -123,9 +123,17 @@ function formatDate(iso) {
   }
 }
 
-function isSameLocalDay(isoA, isoB) {
+function isSameLocalDay(dateString) {
   try {
-    return new Date(isoA).toDateString() === new Date(isoB).toDateString();
+    const normalized = dateString.replace(" ", "T"); // 🔥 FIX
+    const d = new Date(normalized);
+    const now = new Date();
+
+    return (
+      d.getFullYear() === now.getFullYear() &&
+      d.getMonth() === now.getMonth() &&
+      d.getDate() === now.getDate()
+    );
   } catch {
     return false;
   }
@@ -292,9 +300,10 @@ echo 'Hello World';
   const scoreColor = getScoreColor(currentReview.score);
 
   const todaySessions = useMemo(() => {
-    const today = new Date();
-    return sessions.filter((session) => isSameLocalDay(session.createdAt, today));
-  }, [sessions]);
+  return sessions.filter((session) =>
+    isSameLocalDay(session.createdAt)
+  );
+}, [sessions]);
 
   const loadSessions = useCallback(async () => {
     setSessionsLoading(true);
