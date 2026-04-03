@@ -123,16 +123,9 @@ function formatDate(iso) {
   }
 }
 
-function isSameLocalDay(isoDate) {
+function isSameLocalDay(isoA, isoB) {
   try {
-    const sessionDate = new Date(isoDate);
-    const now = new Date();
-
-    return (
-      sessionDate.getFullYear() === now.getFullYear() &&
-      sessionDate.getMonth() === now.getMonth() &&
-      sessionDate.getDate() === now.getDate()
-    );
+    return new Date(isoA).toDateString() === new Date(isoB).toDateString();
   } catch {
     return false;
   }
@@ -299,8 +292,8 @@ echo 'Hello World';
   const scoreColor = getScoreColor(currentReview.score);
 
   const todaySessions = useMemo(() => {
-    
-    return sessions.filter((session) => isSameLocalDay(session.createdAt));
+    const today = new Date();
+    return sessions.filter((session) => isSameLocalDay(session.createdAt, today));
   }, [sessions]);
 
   const loadSessions = useCallback(async () => {
@@ -652,7 +645,7 @@ echo 'Hello World';
               <div className="empty-state">Loading sessions…</div>
             ) : todaySessions.length === 0 ? (
               <div className="empty-state">
-                No sessions 
+                No sessions from today yet. Run your first review and it will appear here.
               </div>
             ) : (
               todaySessions.map((session) => (
