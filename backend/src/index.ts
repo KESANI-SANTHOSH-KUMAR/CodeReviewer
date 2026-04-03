@@ -225,7 +225,7 @@ wss.on("connection", (ws) => {
         language: parsed.language,
         review: JSON.stringify(review),
         score: review.score,
-        createdAt: new Date().toISOString().slice(0, 19).replace("T", " "),
+        createdAt: new Date().toISOString(),
       });
 
       send(ws, {
