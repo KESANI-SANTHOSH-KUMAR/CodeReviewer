@@ -1,75 +1,57 @@
-import Database from "better-sqlite3";
-import fs from "node:fs";
-import path from "node:path";
-import type { SessionRow, SessionSummary } from "./types";
+import { db } from "./dbConnection.js";
+import { RowDataPacket, ResultSetHeader } from "mysql2";
 
-const sqlitePath = process.env.SQLITE_PATH ?? "./data/devlane.sqlite";
-const absolutePath = path.isAbsolute(sqlitePath)
-  ? sqlitePath
-  : path.join(process.cwd(), sqlitePath);
+// ✅ Session Type
+export interface Session {
+  sessionId: string;
+  code: string;
+  language: string;
+  review: string;
+  score: number;
+  createdAt: Date;
+}
 
-fs.mkdirSync(path.dirname(absolutePath), { recursive: true });
-
-const db = new Database(absolutePath);
-db.pragma("journal_mode = WAL");
-
-db.exec(`
-  CREATE TABLE IF NOT EXISTS sessions (
-    session_id TEXT PRIMARY KEY,
-    code TEXT NOT NULL,
-    language TEXT NOT NULL,
-    review TEXT NOT NULL,
-    score INTEGER NOT NULL,
-    created_at TEXT NOT NULL
+// SAVE SESSION
+export async function saveSession(session: Session): Promise<void> {
+  await db.execute<ResultSetHeader>(
+    `INSERT INTO sessions 
+     (sessionId, code, language, review, score, createdAt)
+     VALUES (?, ?, ?, ?, ?, ?)`,
+    [
+      session.sessionId,
+      session.code,
+      session.language,
+      session.review,
+      session.score,
+      session.createdAt,
+    ]
   );
-`);
-
-export function saveSession(row: SessionRow): void {
-  db.prepare(
-    `
-    INSERT INTO sessions (session_id, code, language, review, score, created_at)
-    VALUES (@sessionId, @code, @language, @review, @score, @createdAt)
-    ON CONFLICT(session_id) DO UPDATE SET
-      code=excluded.code,
-      language=excluded.language,
-      review=excluded.review,
-      score=excluded.score,
-      created_at=excluded.created_at
-    `
-  ).run(row);
 }
 
-export function listSessions(): SessionSummary[] {
-  return db
-    .prepare(
-      `
-      SELECT session_id as sessionId, language, score, created_at as createdAt
-      FROM sessions
-      ORDER BY datetime(created_at) DESC
-      `
-    )
-    .all() as SessionSummary[];
+// LIST SESSIONS
+export async function listSessions(): Promise<Session[]> {
+  const [rows] = await db.execute<RowDataPacket[]>(
+    "SELECT * FROM sessions ORDER BY createdAt DESC"
+  );
+  return rows as Session[];
 }
 
-export function getSession(sessionId: string): SessionRow | undefined {
-  return db
-    .prepare(
-      `
-      SELECT
-        session_id as sessionId,
-        code,
-        language,
-        review,
-        score,
-        created_at as createdAt
-      FROM sessions
-      WHERE session_id = ?
-      `
-    )
-    .get(sessionId) as SessionRow | undefined;
+// GET ONE SESSION
+export async function getSession(id: string): Promise<Session | null> {
+  const [rows] = await db.execute<RowDataPacket[]>(
+    "SELECT * FROM sessions WHERE sessionId = ?",
+    [id]
+  );
+
+  return rows.length > 0 ? (rows[0] as Session) : null;
 }
 
-export function deleteSession(sessionId: string): boolean {
-  const result = db.prepare(`DELETE FROM sessions WHERE session_id = ?`).run(sessionId);
-  return result.changes > 0;
+// DELETE SESSION
+export async function deleteSession(id: string): Promise<boolean> {
+  const [result] = await db.execute<ResultSetHeader>(
+    "DELETE FROM sessions WHERE sessionId = ?",
+    [id]
+  );
+
+  return result.affectedRows > 0;
 }
