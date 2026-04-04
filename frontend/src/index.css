@@ -1390,13 +1390,14 @@ button {
 @media (max-width: 1080px) {
   html,
   body {
-    overflow: auto;
+    overflow: auto !important;
+    height: auto !important;
   }
 
   .app-shell {
-    height: auto;
+    height: auto !important;
     min-height: 100vh;
-    overflow: visible;
+    overflow: visible !important;
   }
 
   .main-layout {
@@ -1453,14 +1454,20 @@ button {
     width: min(100vw - 24px, 520px);
   }
 
+  /* Fixed height and z-index to ensure visibility */
   .editor-panel {
-    height: 420px; 
-    min-height: 420px;
+    flex: none;
+    height: 500px; 
+    min-height: 500px;
+    position: relative;
+    z-index: 10;
   }
 
+  /* Adjusted overflow rules */
   .editor-stage {
     height: 100%;
-    min-height: 300px;
+    min-height: 400px;
+    overflow: visible;
   }
 
   .monaco-editor,
