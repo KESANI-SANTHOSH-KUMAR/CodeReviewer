@@ -1095,7 +1095,7 @@ button {
     width: 100%;
     max-width: none;
     flex: 0 0 auto;
-    max-height: 260px;
+    max-height: 240px;
     overflow: auto;
     resize: none;
     order: 1;
@@ -1116,12 +1116,6 @@ button {
     order: 2;
   }
 
-  .editor-stage {
-    width: 100%;
-    min-height: clamp(280px, 42dvh, 380px);
-    height: clamp(280px, 42dvh, 380px);
-  }
-
   .review-panel {
     width: 100% !important;
     min-width: 0;
@@ -1138,18 +1132,32 @@ button {
   }
 
   .toolbar {
+    display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
     padding: 12px;
   }
 
-  .toolbar-left,
-  .toolbar-actions {
+  .toolbar-left {
     width: 100%;
+    gap: 8px;
+  }
+
+  .mini-stat {
+    display: none;
+  }
+
+  .select {
+    width: 100%;
+    min-width: 0;
   }
 
   .toolbar-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
     justify-content: stretch;
   }
 
@@ -1158,10 +1166,20 @@ button {
     width: 100%;
   }
 
-  .select,
-  .mini-stat {
+  .editor-stage {
     width: 100%;
-    min-width: 0;
+    min-height: clamp(320px, 44dvh, 420px);
+    height: clamp(320px, 44dvh, 420px);
+    overflow: hidden;
+  }
+
+  .editor-stage .monaco-editor,
+  .editor-stage .overflow-guard,
+  .editor-stage .monaco-scrollable-element,
+  .editor-stage .monaco-editor-background {
+    height: 100% !important;
+    min-height: 100% !important;
+    width: 100% !important;
   }
 
   .sessions-header {
@@ -1171,79 +1189,5 @@ button {
 
   .sessions-header-actions {
     justify-content: flex-start;
-  }
-}
-
-@media (max-width: 760px) {
-  .app-shell {
-    padding: 8px;
-    gap: 10px;
-  }
-
-  .header,
-  .notice-bar,
-  .sessions-panel,
-  .editor-panel,
-  .review-panel {
-    border-radius: 18px;
-  }
-
-  .brand-title {
-    font-size: 20px;
-  }
-
-  .brand-subtitle {
-    font-size: 10px;
-  }
-
-  .editor-stage {
-    min-height: 300px;
-    height: 300px;
-  }
-
-  .review-hero {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
-  }
-
-  .metric-row {
-    grid-template-columns: 1fr;
-  }
-
-  .tab-row {
-    gap: 6px;
-    padding: 6px;
-  }
-
-  .tab {
-    min-width: 84px;
-  }
-}
-
-@media (max-width: 480px) {
-  .app-shell {
-    padding: 6px;
-  }
-
-  .sessions-panel {
-    max-height: 220px;
-  }
-
-  .editor-stage {
-    min-height: 260px;
-    height: 260px;
-  }
-
-  .review-copy h2 {
-    font-size: 22px;
-  }
-
-  .score-ring {
-    width: 148px;
-  }
-
-  .empty-dashboard {
-    padding: 18px 14px;
   }
 }
