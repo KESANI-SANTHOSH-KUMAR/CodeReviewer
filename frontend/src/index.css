@@ -1075,6 +1075,7 @@ button {
   box-shadow: 0 0 14px rgba(99, 102, 241, 0.8);
 }
 
+
 @media (max-width: 1180px) {
   body {
     overflow: auto;
@@ -1082,228 +1083,26 @@ button {
 
   .app-shell {
     height: auto;
-    min-height: 100%;
+    min-height: 100dvh;
   }
 
   .main-layout {
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
   }
 
   .sessions-panel {
     width: 100%;
-    flex: 0 0 auto;
     max-width: none;
-    max-height: 360px;
-  }
-
-  .workspace {
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .editor-panel,
-  .review-panel {
-    width: 100% !important;
-    max-width: 100%;
-    min-width: 0;
-    flex-basis: auto !important;
-  }
-
-  .resizer {
-    width: 100%;
-    height: 10px;
-    cursor: row-resize;
-    flex: 0 0 10px;
-  }
-
-  .resizer::before {
-    width: 64%;
-    height: 2px;
-  }
-
-  .toolbar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .toolbar-left,
-  .toolbar-actions {
-    width: 100%;
-  }
-
-  .toolbar-actions {
-    justify-content: flex-start;
-  }
-
-  .sessions-header {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .sessions-header-actions {
-    justify-content: flex-start;
-  }
-
-  .review-panel {
-    max-height: 760px;
-  }
-}
-
-@media (max-width: 760px) {
-  .app-shell {
-    padding: 12px;
-    gap: 12px;
-  }
-
-  .header {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .brand {
-    align-items: flex-start;
-  }
-
-  .header-right {
-    width: 100%;
-    justify-content: stretch;
-  }
-
-  .status-pill {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .notice-bar {
-    flex-wrap: wrap;
-    align-items: flex-start;
-  }
-
-  .notice-right {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .review-hero {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
-  }
-
-  .score-ring {
-    width: 156px;
-  }
-
-  .metric-row {
-    grid-template-columns: 1fr;
-  }
-
-  .select {
-    min-width: 100%;
-    width: 100%;
-  }
-
-  .mini-stat {
-    width: 100%;
-  }
-
-  .toolbar-actions .button,
-  .toolbar-actions .button.small {
-    width: 100%;
-  }
-
-  .tab-row {
-    gap: 6px;
-    padding: 6px;
-  }
-
-  .tab {
-    min-width: 84px;
-  }
-
-  .history-drawer {
-    width: 100%;
-    border-radius: 0;
-  }
-
-  .empty-dashboard {
-    padding: 22px 18px;
-  }
-
-  .empty-dashboard h2 {
-    font-size: 24px;
-  }
-}
-
-@media (max-width: 480px) {
-  .brand-title {
-    font-size: 21px;
-  }
-
-  .brand-subtitle,
-  .review-summary,
-  .session-id,
-  .sessions-meta {
-    font-size: 12px;
-  }
-
-  .header,
-  .notice-bar,
-  .sessions-panel,
-  .review-panel,
-  .editor-panel {
-    border-radius: 20px;
-  }
-
-  .toolbar,
-  .sessions-panel,
-  .review-panel {
-    padding: 14px;
-  }
-
-  .review-copy h2 {
-    font-size: 24px;
-  }
-
-  .empty-art {
-    width: 84px;
-    height: 84px;
-    font-size: 38px;
-  }
-}
-
-
-
-
-
-@media (max-width: 760px) {
-  body {
+    flex: 0 0 auto;
+    max-height: 260px;
     overflow: auto;
-  }
-
-  .app-shell {
-    padding: 10px;
-    gap: 10px;
-  }
-
-  .main-layout {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .sessions-panel {
-    width: 100%;
-    max-width: none;
-    flex: 0 0 auto;
-    max-height: none;
     resize: none;
     order: 1;
   }
 
   .workspace {
     width: 100%;
-    display: flex;
     flex-direction: column;
     gap: 12px;
     order: 2;
@@ -1314,13 +1113,13 @@ button {
     min-width: 0;
     max-width: none;
     flex: 0 0 auto;
-    order: 1;
-    min-height: 62vh;
+    order: 2;
   }
 
   .editor-stage {
-    min-height: 52vh;
-    height: 52vh;
+    width: 100%;
+    min-height: clamp(280px, 42dvh, 380px);
+    height: clamp(280px, 42dvh, 380px);
   }
 
   .review-panel {
@@ -1328,8 +1127,9 @@ button {
     min-width: 0;
     max-width: none;
     flex: 0 0 auto;
-    order: 2;
+    order: 3;
     max-height: none;
+    overflow: visible;
   }
 
   .resizer,
@@ -1340,17 +1140,16 @@ button {
   .toolbar {
     flex-direction: column;
     align-items: stretch;
-    gap: 12px;
-    padding: 14px;
+    gap: 10px;
+    padding: 12px;
   }
 
-  .toolbar-left {
+  .toolbar-left,
+  .toolbar-actions {
     width: 100%;
-    gap: 10px;
   }
 
   .toolbar-actions {
-    width: 100%;
     justify-content: stretch;
   }
 
@@ -1365,29 +1164,20 @@ button {
     min-width: 0;
   }
 
-  .review-hero {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
+  .sessions-header {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .metric-row {
-    grid-template-columns: 1fr;
-  }
-
-  .tab-row {
-    gap: 6px;
-    padding: 6px;
-  }
-
-  .tab {
-    min-width: 84px;
+  .sessions-header-actions {
+    justify-content: flex-start;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 760px) {
   .app-shell {
     padding: 8px;
+    gap: 10px;
   }
 
   .header,
@@ -1407,8 +1197,42 @@ button {
   }
 
   .editor-stage {
-    min-height: 48vh;
-    height: 48vh;
+    min-height: 300px;
+    height: 300px;
+  }
+
+  .review-hero {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .metric-row {
+    grid-template-columns: 1fr;
+  }
+
+  .tab-row {
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .tab {
+    min-width: 84px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-shell {
+    padding: 6px;
+  }
+
+  .sessions-panel {
+    max-height: 220px;
+  }
+
+  .editor-stage {
+    min-height: 260px;
+    height: 260px;
   }
 
   .review-copy h2 {
@@ -1420,92 +1244,6 @@ button {
   }
 
   .empty-dashboard {
-    padding: 20px 14px;
-  }
-}
-
-
-
-
-
-
-
-
-/* ===== PERFECT MOBILE FIX ===== */
-
-@media (max-width: 760px) {
-  body {
-    overflow: auto;
-  }
-
-  .app-shell {
-    padding: 8px;
-    gap: 10px;
-  }
-
-  .main-layout {
-    flex-direction: column;
-    gap: 10px;
-  }
-
- 
-  .sessions-panel {
-    width: 100%;
-    max-width: none;
-    flex: 0 0 auto;
-    order: 1;
-  }
-
-
-  .workspace {
-    flex-direction: column;
-    gap: 10px;
-    order: 2;
-  }
-
-  .editor-panel {
-    order: 1;
-    min-height: 300px;
-    height: auto;
-    flex: none;
-  }
-
-  .editor-stage {
-    height: 300px;   
-    min-height: 300px;
-  }
-
-  .review-panel {
-    order: 2;
-    max-height: none;
-  }
-
- 
-  .resizer,
-  .session-resizer {
-    display: none;
-  }
-
-  
-  .toolbar {
-    flex-direction: column;
-    gap: 10px;
-    padding: 12px;
-  }
-
-  .toolbar-actions .button {
-    width: 100%;
-  }
-
-  .select,
-  .mini-stat {
-    width: 100%;
-  }
-}
-
-
-@media (max-width: 480px) {
-  .editor-stage {
-    height: 260px;  
+    padding: 18px 14px;
   }
 }
