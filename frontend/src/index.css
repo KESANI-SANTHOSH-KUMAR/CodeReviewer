@@ -575,7 +575,7 @@ button {
   align-items: stretch;
 }
 
-
+.editor-panel,
 .review-panel {
   min-width: 0;
   min-height: 0;
@@ -583,30 +583,10 @@ button {
   flex: 0 1 auto;
 }
 
-/* ===== HARD FIX FOR MONACO ===== */
-
 .editor-panel {
-  display: block; 
-  width: 100%;
-}
-
-.editor-stage {
-  position: relative;
-  width: 100%;
-  height: 420px; 
-  min-height: 320px;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
-  background: linear-gradient(180deg, rgba(2, 6, 23, 0.28), rgba(2, 6, 23, 0.08));
-}
-
-
-.monaco-editor,
-.monaco-editor .overflow-guard,
-.monaco-editor-background {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
 }
 
 .toolbar {
@@ -685,7 +665,13 @@ button {
   box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.08);
 }
 
-
+.editor-stage {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(180deg, rgba(2, 6, 23, 0.28), rgba(2, 6, 23, 0.08));
+}
 
 .editor-stage::before {
   content: "";
@@ -699,8 +685,7 @@ button {
 }
 
 .editor-stage > * {
-  position: absolute;
-  inset: 0;
+  position: relative;
   z-index: 2;
 }
 
@@ -1469,26 +1454,19 @@ button {
   }
 
   .editor-panel {
-  display: flex;
-  flex-direction: column;
-  min-height: 320px;
-  height: auto;
-}
+    height: 420px; 
+    min-height: 420px;
+  }
 
- .editor-stage {
-  height: 45vh;
-  min-height: 300px;
-}
-
-  .editor-stage > div {
-  flex: 1 !important;
-  height: 100% !important;
-}
+  .editor-stage {
+    height: 100%;
+    min-height: 300px;
+  }
 
   .monaco-editor,
   .monaco-editor .overflow-guard {
-  height: 100% !important;
-}
+    height: 100% !important;
+  }
 }
 
 @media (max-width: 720px) {
