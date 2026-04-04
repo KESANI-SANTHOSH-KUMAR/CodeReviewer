@@ -190,8 +190,8 @@ button {
 }
 
 .brand-mark {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   display: grid;
   place-items: center;
   border-radius: 16px;
@@ -202,15 +202,15 @@ button {
 }
 
 .brand-title {
-  font-size: 24px;
-  font-weight: 900;
+  font-size: 20px;
+  font-weight: 850;
   letter-spacing: -0.04em;
   line-height: 1.05;
 }
 
 .brand-subtitle {
   margin-top: 4px;
-  font-size: 13px;
+  font-size: 10px;
   color: var(--muted);
 }
 
