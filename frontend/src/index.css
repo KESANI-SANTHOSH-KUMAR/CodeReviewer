@@ -1423,3 +1423,89 @@ button {
     padding: 20px 14px;
   }
 }
+
+
+
+
+
+
+
+
+/* ===== PERFECT MOBILE FIX ===== */
+
+@media (max-width: 760px) {
+  body {
+    overflow: auto;
+  }
+
+  .app-shell {
+    padding: 8px;
+    gap: 10px;
+  }
+
+  .main-layout {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+ 
+  .sessions-panel {
+    width: 100%;
+    max-width: none;
+    flex: 0 0 auto;
+    order: 1;
+  }
+
+
+  .workspace {
+    flex-direction: column;
+    gap: 10px;
+    order: 2;
+  }
+
+  .editor-panel {
+    order: 1;
+    min-height: 300px;
+    height: auto;
+    flex: none;
+  }
+
+  .editor-stage {
+    height: 300px;   
+    min-height: 300px;
+  }
+
+  .review-panel {
+    order: 2;
+    max-height: none;
+  }
+
+ 
+  .resizer,
+  .session-resizer {
+    display: none;
+  }
+
+  
+  .toolbar {
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .toolbar-actions .button {
+    width: 100%;
+  }
+
+  .select,
+  .mini-stat {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .editor-stage {
+    height: 260px;  
+  }
+}
