@@ -1780,3 +1780,58 @@ body {
   }
 }
 
+@media (max-width: 1080px) {
+  /* 1. Force the container to show overflow so we can scroll to the editor */
+  html, 
+  body, 
+  #root, 
+  .app-shell {
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* 2. Prevent the workspace from squishing the editor to 0px */
+  .main-layout,
+  .workspace {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* 3. THE CRITICAL FIX: Force height on the editor panel */
+  /* We use !important to override JavaScript-injected inline styles */
+  .editor-panel {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: 600px !important; /* Fixed height for mobile */
+    min-height: 600px !important;
+    flex: none !important;
+    margin-bottom: 20px;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* 4. Ensure the Monaco Editor container fills that height */
+  .editor-stage {
+    flex: 1 !important;
+    height: 100% !important;
+    min-height: 500px !important;
+    background: var(--bg-2) !important;
+    overflow: hidden !important; /* Monaco needs this internally */
+  }
+
+  /* 5. Hide the resizer bar on mobile (it breaks the touch flow) */
+  .resizer {
+    display: none !important;
+  }
+
+  /* 6. Ensure the review panel (scores) appears below the editor */
+  .review-panel {
+    width: 100% !important;
+    height: auto !important;
+    flex: none !important;
+    overflow: visible !important;
+  }
+}
