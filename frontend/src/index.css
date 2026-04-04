@@ -1452,6 +1452,21 @@ button {
   .history-drawer {
     width: min(100vw - 24px, 520px);
   }
+
+  .editor-panel {
+    height: 420px; 
+    min-height: 420px;
+  }
+
+  .editor-stage {
+    height: 100%;
+    min-height: 300px;
+  }
+
+  .monaco-editor,
+  .monaco-editor .overflow-guard {
+    height: 100% !important;
+  }
 }
 
 @media (max-width: 720px) {
