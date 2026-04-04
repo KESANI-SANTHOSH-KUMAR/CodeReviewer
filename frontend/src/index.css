@@ -1272,3 +1272,154 @@ button {
     font-size: 38px;
   }
 }
+
+
+
+
+
+@media (max-width: 760px) {
+  body {
+    overflow: auto;
+  }
+
+  .app-shell {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .main-layout {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sessions-panel {
+    width: 100%;
+    max-width: none;
+    flex: 0 0 auto;
+    max-height: none;
+    resize: none;
+    order: 1;
+  }
+
+  .workspace {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    order: 2;
+  }
+
+  .editor-panel {
+    width: 100% !important;
+    min-width: 0;
+    max-width: none;
+    flex: 0 0 auto;
+    order: 1;
+    min-height: 62vh;
+  }
+
+  .editor-stage {
+    min-height: 52vh;
+    height: 52vh;
+  }
+
+  .review-panel {
+    width: 100% !important;
+    min-width: 0;
+    max-width: none;
+    flex: 0 0 auto;
+    order: 2;
+    max-height: none;
+  }
+
+  .resizer,
+  .session-resizer {
+    display: none;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .toolbar-left {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .toolbar-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .toolbar-actions .button,
+  .toolbar-actions .button.small {
+    width: 100%;
+  }
+
+  .select,
+  .mini-stat {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .review-hero {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .metric-row {
+    grid-template-columns: 1fr;
+  }
+
+  .tab-row {
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .tab {
+    min-width: 84px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-shell {
+    padding: 8px;
+  }
+
+  .header,
+  .notice-bar,
+  .sessions-panel,
+  .editor-panel,
+  .review-panel {
+    border-radius: 18px;
+  }
+
+  .brand-title {
+    font-size: 20px;
+  }
+
+  .brand-subtitle {
+    font-size: 10px;
+  }
+
+  .editor-stage {
+    min-height: 48vh;
+    height: 48vh;
+  }
+
+  .review-copy h2 {
+    font-size: 22px;
+  }
+
+  .score-ring {
+    width: 148px;
+  }
+
+  .empty-dashboard {
+    padding: 20px 14px;
+  }
+}
