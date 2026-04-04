@@ -1564,3 +1564,219 @@ button {
     scroll-behavior: auto !important;
   }
 }
+
+
+
+
+:root {
+  --bg-0: #050816;
+  --bg-1: #08111f;
+  --bg-2: #0b1729;
+  --bg-3: #101b2d;
+  --glass: rgba(10, 15, 28, 0.62);
+  --glass-strong: rgba(11, 18, 33, 0.88);
+  --glass-soft: rgba(255, 255, 255, 0.04);
+  --border-subtle: rgba(255, 255, 255, 0.10);
+  --border-muted: rgba(148, 163, 184, 0.18);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --text-0: #f8fafc;
+  --text-1: #e2e8f0;
+  --text-2: #94a3b8;
+  --text-3: #64748b;
+  --emerald: #10b981;
+  --emerald-2: rgba(16, 185, 129, 0.16);
+  --amber: #f59e0b;
+  --amber-2: rgba(245, 158, 11, 0.16);
+  --rose: #f43f5e;
+  --rose-2: rgba(244, 63, 94, 0.16);
+  --cyan: #38bdf8;
+  --violet: #8b5cf6;
+  --shadow-lg: 0 24px 80px rgba(0, 0, 0, 0.55);
+  --shadow-md: 0 14px 40px rgba(0, 0, 0, 0.38);
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.26);
+  --radius-xl: 24px;
+  --radius-lg: 20px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+  --radius-xs: 10px;
+  --gap-1: 4px;
+  --gap-2: 8px;
+  --gap-3: 12px;
+  --gap-4: 16px;
+  --gap-5: 20px;
+  --gap-6: 24px;
+  --speed-1: 120ms;
+  --speed-2: 180ms;
+  --speed-3: 240ms;
+  --speed-4: 320ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --header-h: 74px;
+  --notice-h: 48px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  overflow-x: hidden;
+  background:
+    radial-gradient(1200px 700px at 20% 10%, rgba(56, 189, 248, 0.10), transparent 50%),
+    radial-gradient(900px 600px at 80% 20%, rgba(139, 92, 246, 0.10), transparent 55%),
+    radial-gradient(900px 700px at 50% 100%, rgba(16, 185, 129, 0.08), transparent 52%),
+    linear-gradient(180deg, var(--bg-0), var(--bg-1) 36%, var(--bg-0));
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--text-1);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Base Desktop Layout (default) */
+.app-shell {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.main-layout {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.workspace {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.editor-panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.editor-stage {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  background: rgba(2, 6, 23, 0.28);
+}
+
+/* Glass & UI Elements */
+.glass {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.018)),
+              linear-gradient(135deg, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.58));
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(12px);
+}
+
+.resizer {
+  width: 12px;
+  cursor: col-resize;
+  flex: 0 0 12px;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+.resizer::before {
+  content: "";
+  width: 2px;
+  height: 100%;
+  background: rgba(148, 163, 184, 0.2);
+}
+
+/* MOBILE & TABLET OPTIMIZATIONS */
+@media (max-width: 1080px) {
+  html, body {
+    overflow-y: auto !important;
+    height: auto !important;
+  }
+
+  .app-shell {
+    height: auto !important;
+    min-height: 100vh;
+    overflow: visible !important;
+  }
+
+  .main-layout {
+    flex-direction: column;
+    overflow: visible;
+    height: auto;
+  }
+
+  .workspace {
+    flex-direction: column;
+    overflow: visible;
+    height: auto;
+  }
+
+  /* Override the inline style flex-basis from JS */
+  .editor-panel, .review-panel {
+    flex-basis: auto !important; 
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .editor-panel {
+    min-height: 500px;
+    margin-bottom: 20px;
+  }
+
+  .editor-stage {
+    min-height: 400px;
+    height: 450px; /* Specific height for Monaco to initialize */
+  }
+
+  .resizer {
+    display: none; /* Hide resizer on mobile */
+  }
+
+  .sessions-panel {
+    max-width: 100%;
+    flex: none;
+    height: auto;
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 720px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .editor-panel {
+    min-height: 450px;
+  }
+
+  .editor-stage {
+    height: 350px;
+  }
+
+  .score-ring {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+  }
+}
+
