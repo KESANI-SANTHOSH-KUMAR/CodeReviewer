@@ -1454,19 +1454,28 @@ button {
   }
 
   .editor-panel {
-    height: 420px; 
-    min-height: 420px;
-  }
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+  height: auto;
+}
 
   .editor-stage {
-    height: 100%;
-    min-height: 300px;
-  }
+  flex: 1;
+  min-height: 300px;
+  height: auto;
+  display: flex;
+}
+
+  .editor-stage > div {
+  flex: 1 !important;
+  height: 100% !important;
+}
 
   .monaco-editor,
   .monaco-editor .overflow-guard {
-    height: 100% !important;
-  }
+  height: 100% !important;
+}
 }
 
 @media (max-width: 720px) {
