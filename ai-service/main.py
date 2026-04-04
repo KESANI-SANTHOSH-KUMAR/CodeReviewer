@@ -126,6 +126,10 @@ def stream_json_response(payload: dict):
 def root():
     return {"message": "AI Code Review Service Running (Groq)"}
 
+@app.head("/")
+def head_root():
+    return Response(status_code=200)
+
 # ==============================
 # HEALTH
 # ==============================
