@@ -1264,3 +1264,38 @@ button {
     padding: 18px 14px;
   }
 }
+
+@media (max-width: 1180px) {
+  html, body {
+    height: auto;
+    overflow: auto;
+  }
+
+  #root {
+    height: auto;
+  }
+
+  .app-shell {
+    height: auto !important;
+    min-height: 100vh;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 1180px) {
+  .editor-panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .editor-stage {
+    height: 320px !important;
+    min-height: 320px !important;
+    flex: none;
+  }
+
+
+  .editor-stage > div {
+    height: 100% !important;
+  }
+}
